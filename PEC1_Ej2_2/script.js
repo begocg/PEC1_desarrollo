@@ -44,8 +44,13 @@ function calculate() {
 
     if (checkInput(amountEl_one)) {
         displayLoading();
+        
         fetch(`https://v6.exchangerate-api.com/v6/c7ef4796ee7a74a30c236948/latest/${currency_one}`)
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    rateEl.innerText = 'No se puede acceder a la API';
+                }
+                return res.json();})
             .then(data => {
                 hideLoading();
                 const rate = data.conversion_rates[currency_two];
