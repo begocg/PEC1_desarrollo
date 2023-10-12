@@ -21,7 +21,7 @@ body {
     
 }
 
-.movie-container select {
+.movie-container select, .currency-container select  {
     background-color: #F7ECDA;
     border: 0;
     border-radius: 5px;
