@@ -24,34 +24,27 @@ function isValidEmail(email) {
     return re.test(String(email).toLocaleLowerCase());
 }
 
+// Check required fields
+function checkRequired(inputArr) {
+    inputArr.forEach(function (input) {
+        if(input.value.trim () === '') {
+            showError(input, `${getFieldName(input)} es obligatorio`)
+        } else {
+            showSuccess(input);
+        }
+    });
+
+}
+
+// Get fieldname
+function getFieldName(input) {
+    return input.id.charAt(0).toUpperCase() + input.id.slice(1);
+}
 
 // Event listeners
 form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    if (username.value === '') {
-        showError(username, 'El nombre de usuario es obligatorio')
-    }
-    else {
-        showSuccess(username);
-    }
-    if (email.value === '') {
-        showError(email, 'El correo electrónico es obligatorio');
-    } else if(!isValidEmail(email.value)) {
-        showError(email, 'El correo electrónico no es válido');
-    } else {
-        showSuccess(email);
-    }
-    if (password.value === '') {
-        showError(password, 'La contraseña es obligatoria')
-    }
-    else {
-        showSuccess(password);
-    }
-    if (password2.value === '') {
-        showError(password2, 'Las contraseñas no coinciden')
-    }
-    else {
-        showSuccess(password2);
-    }
+    checkRequired([username, email, password, password2]);
+
 });
